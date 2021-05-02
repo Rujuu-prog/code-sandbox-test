@@ -152,7 +152,7 @@
 /**
  * mapやfilterを使った配列処理
  */
-const nameArr = ["田中", "山田", "Rujuu"];
+// const nameArr = ["田中", "山田", "Rujuu"];
 // for (let index = 0; index < nameArr.length; index++) {
 //   console.log(`${index + 1 }番目は${nameArr[index]}`);
 // }
@@ -218,6 +218,41 @@ const nameArr = ["田中", "山田", "Rujuu"];
 // console.log(fee);
 
 // &&は左側がtrueなら右側を返す(左がfalseなら左を返す)
-const num2 = 100;
-const fee2 = num2 && "何か設定されました";
-console.log(fee2);
+// const num2 = 100;
+// const fee2 = num2 && "何か設定されました";
+// console.log(fee2);
+
+/**
+ * クロージャー
+ */
+//関数を呼び出すたびにカウントアップ
+// function Countup(){
+//   let num = 0;
+//   function AddNumber(){
+//     num += 1;
+//     console.log(num);
+//   }
+
+//   return AddNumber;
+// }
+
+// const count = Countup();
+// count();
+// count();
+// count();
+
+//動的な関数の作成
+function AddNumberFactory(num) {
+  function SumNumber(value) {
+    return num + value;
+  }
+  return SumNumber;
+}
+
+const add5 = AddNumberFactory(5);
+const add10 = AddNumberFactory(10);
+
+const result = add5(20);
+console.log(result);
+const result2 = add10(20);
+console.log(result2);
