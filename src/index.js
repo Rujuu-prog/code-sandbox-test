@@ -242,17 +242,69 @@
 // count();
 
 //動的な関数の作成
-function AddNumberFactory(num) {
-  function SumNumber(value) {
-    return num + value;
+// function AddNumberFactory(num) {
+//   function SumNumber(value) {
+//     return num + value;
+//   }
+//   return SumNumber;
+// }
+
+// const add5 = AddNumberFactory(5);
+// const add10 = AddNumberFactory(10);
+
+// const result = add5(20);
+// console.log(result);
+// const result2 = add10(20);
+// console.log(result2);
+
+/**
+ * 即時関数(IIFE)
+ */
+//関数内で使えるものとグローバルに使えるものに分ける際に使われる
+//( )はグループ化の役割
+// const c = (function (){
+//   let privateval = 0
+//   let pubval = 10
+
+//   function privateFnc(){
+//     console.log('privatefnc is called')
+//   }
+//   function pubFnc(){
+//     console.log('pubfnc is called')
+//   }
+
+//   return{
+//     pubval,
+//     pubFnc
+//   };
+// })();
+
+// c.pubFnc();
+// console.log(c.pubval);
+
+/**
+ * 即時関数(IIFE)（応用）
+ */
+//クロージャーと組み合わせると、呼び出すたびにカウントアップする関数を作れる。
+//returnで返していないから関数の外からはprivatevalをいじれない
+const c = (function () {
+  let privateval = 0;
+  let pubval = 10;
+
+  function privateFnc() {
+    console.log("privatefnc is called");
   }
-  return SumNumber;
-}
+  function pubFnc() {
+    console.log("pubfnc is called" + privateval++);
+  }
 
-const add5 = AddNumberFactory(5);
-const add10 = AddNumberFactory(10);
+  return {
+    pubval,
+    pubFnc
+  };
+})();
 
-const result = add5(20);
-console.log(result);
-const result2 = add10(20);
-console.log(result2);
+c.pubFnc();
+c.pubFnc();
+c.pubFnc();
+console.log(c.pubval);
